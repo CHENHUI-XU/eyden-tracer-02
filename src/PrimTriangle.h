@@ -53,6 +53,7 @@ public:
 		if (ray.t <= f || f <  Epsilon  ) return false;
 		
 		ray.t = f;
+		ray.hit = this;
 		
 		return true;
 	}
@@ -60,8 +61,9 @@ public:
 	virtual Vec3f GetNormal(const Ray& ray) const override
 	{
 		// --- PUT YOUR CODE HERE ---
-		return Vec3f();
+		return normalize((m_b - m_a).cross(m_c - m_a));
 	}
+	
 	
 private:
 	Vec3f m_a;	///< Position of the first vertex

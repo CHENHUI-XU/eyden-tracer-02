@@ -22,7 +22,11 @@ public:
 	virtual Vec3f Shade(const Ray& ray) const override
 	{
 		// --- PUT YOUR CODE HERE ---
-		return RGB(0, 0, 0);
+		Vec3f N = ray.hit->GetNormal(ray);
+		float cosTheta = (N.dot(ray.dir))/ (norm(ray.dir) * norm(N));
+		Vec3f result = fabs(cosTheta) * CShaderFlat::Shade(ray);
+		//formula given by the problem set
+		return result;
 	}
 };
 
